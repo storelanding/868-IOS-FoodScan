@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us – Nutrition &amp; Calorie Tracker</title>
+  <meta name="description" content="Get in touch with the Nutrition & Calorie Tracker team for support, feedback or suggestions." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-800: #14532d; --green-700: #1b7a3d; --green-600: #22a447; --green-500: #34c759;
+      --green-100: #e5f6ea; --green-50: #f3fbf5; --ink: #12261b; --muted: #5b6b62;
+      --shadow: 0 20px 50px -20px rgba(20, 83, 45, 0.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif; color: var(--ink); line-height: 1.6; background: #fff; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1040px, 92%); margin: 0 auto; }
+
+    header.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(20,83,45,.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .nav-links { display: flex; gap: 26px; font-weight: 600; font-size: .95rem; color: var(--muted); }
+    .nav-links a:hover, .nav-links a.active { color: var(--green-700); }
+
+    .hero {
+      background:
+        radial-gradient(900px 420px at 85% -20%, rgba(52,199,89,.22), transparent 60%),
+        linear-gradient(180deg, var(--green-50), #fff);
+      padding: 72px 0 40px; text-align: center;
+    }
+    .eyebrow { color: var(--green-600); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; margin: 10px 0 14px; }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 620px; margin: 0 auto; }
+
+    main { padding: 32px 0 96px; }
+    .grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: start; }
+
+    .info { display: grid; gap: 18px; }
+    .info-card { border: 1px solid rgba(20,83,45,.1); border-radius: 22px; padding: 24px; display: flex; gap: 16px; background: #fff; }
+    .info-card .icon { flex: none; width: 50px; height: 50px; border-radius: 14px; background: var(--green-100); display: grid; place-items: center; font-size: 1.4rem; }
+    .info-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
+    .info-card p { color: var(--muted); font-size: .95rem; }
+    .info-card a.mail { color: var(--green-700); font-weight: 700; word-break: break-all; }
+    .info-card.highlight { background: linear-gradient(135deg, var(--green-800), var(--green-600)); border: none; color: #fff; }
+    .info-card.highlight .icon { background: rgba(255,255,255,.18); }
+    .info-card.highlight p { color: rgba(255,255,255,.9); }
+
+    form { border: 1px solid rgba(20,83,45,.1); border-radius: 26px; padding: 34px; box-shadow: var(--shadow); background: #fff; }
+    form h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+    form > p { color: var(--muted); margin-bottom: 24px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 6px; }
+    .field { margin-bottom: 18px; }
+    input, select, textarea {
+      width: 100%; font: inherit; color: var(--ink);
+      padding: 13px 15px; border-radius: 14px;
+      border: 1.5px solid rgba(20,83,45,.15); background: var(--green-50);
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green-600); background: #fff; box-shadow: 0 0 0 4px rgba(34,164,71,.15); }
+    button {
+      width: 100%; border: none; cursor: pointer; font: inherit; font-weight: 800; font-size: 1.05rem;
+      color: #fff; background: linear-gradient(135deg, var(--green-700), var(--green-500));
+      padding: 15px; border-radius: 14px; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 12px 26px -12px rgba(27,122,61,.7);
+    }
+    button:hover { transform: translateY(-2px); }
+    .note { margin-top: 14px; font-size: .85rem; color: var(--muted); text-align: center; }
+    .status { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--green-100); color: var(--green-800); font-weight: 600; font-size: .92rem; }
+    .status.show { display: block; }
+
+    .faq { margin-top: 72px; }
+    .faq h2 { text-align: center; font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 800; margin-bottom: 28px; }
+    details { border: 1px solid rgba(20,83,45,.1); border-radius: 18px; padding: 18px 22px; margin-bottom: 14px; background: #fff; }
+    details[open] { background: var(--green-50); }
+    summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--green-600); font-weight: 800; font-size: 1.3rem; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); margin-top: 10px; }
+
+    footer { border-top: 1px solid rgba(20,83,45,.1); padding: 32px 0; color: var(--muted); font-size: .92rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-inner nav { display: flex; gap: 22px; }
+    .footer-inner a:hover { color: var(--green-700); }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 16px; font-size: .88rem; }
+    }
+    @media (max-width: 560px) {
+      .row2 { grid-template-columns: 1fr; }
+      form { padding: 24px; }
+      .nav-links a.hide-sm { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Food Scan logo" />
+        Nutrition &amp; Calorie Tracker
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="hide-sm">Home</a>
+        <a href="policies.html">Privacy</a>
+        <a href="contact-us.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Contact Us</span>
+      <h1>We'd love to hear from you</h1>
+      <p>Questions, feedback or suggestions? Our team reads every message and will get back to you as soon as possible.</p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <div class="grid">
+        <div class="info">
+          <div class="info-card">
+            <div class="icon">✉️</div>
+            <div>
+              <h3>Email us</h3>
+              <p>For support, feedback and data requests:</p>
+              <a class="mail" href="mailto:jobertsonrule56425@gmail.com">jobertsonrule56425@gmail.com</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="icon">⏱️</div>
+            <div>
+              <h3>Response time</h3>
+              <p>We usually reply within 1–2 business days.</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="icon">🔒</div>
+            <div>
+              <h3>Privacy &amp; data deletion</h3>
+              <p>Want your data removed? Choose “Data deletion request” in the form, or read our <a href="policies.html" style="color: var(--green-700); font-weight: 700;">Privacy Policy</a>.</p>
+            </div>
+          </div>
+          <div class="info-card highlight">
+            <div class="icon">❤️</div>
+            <div>
+              <h3>Your feedback matters</h3>
+              <p>This nutrition and calorie tracker always needs your recommendations and feedback to improve. Thank you so much!</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <h2>Send us a message</h2>
+          <p>Fill out the form and your email app will open with the message ready to send.</p>
+          <div class="row2">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option>General question</option>
+              <option>Technical support</option>
+              <option>Feedback &amp; suggestions</option>
+              <option>Subscription &amp; billing</option>
+              <option>Data deletion request</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit">Send message</button>
+          <div class="status" id="status" role="status"></div>
+          <p class="note">Or email us directly at <a href="mailto:jobertsonrule56425@gmail.com" style="color: var(--green-700); font-weight: 700;">jobertsonrule56425@gmail.com</a></p>
+        </form>
+      </div>
+
+      <section class="faq">
+        <h2>Frequently asked questions</h2>
+        <details>
+          <summary>How does AI food scanning work?</summary>
+          <p>Take a photo of your meal and the app's AI estimates the calories, protein, carbs, fat and fiber in seconds. You can also scan barcodes or enter food manually.</p>
+        </details>
+        <details>
+          <summary>How do I manage or cancel my subscription?</summary>
+          <p>Subscriptions are handled by Apple. Open Settings on your iPhone, tap your name, then Subscriptions, and choose the subscription you want to manage or cancel.</p>
+        </details>
+        <details>
+          <summary>How can I delete my data?</summary>
+          <p>Send us a message with the topic “Data deletion request” or email us directly, and we will process your request.</p>
+        </details>
+        <details>
+          <summary>Can I suggest a new feature?</summary>
+          <p>Absolutely! We'd love to receive more suggestions from our users. Choose “Feedback &amp; suggestions” in the form above.</p>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Nutrition &amp; Calorie Tracker. All rights reserved.</span>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="policies.html">Privacy Policy</a>
+        <a href="contact-us.html">Contact Us</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const SUPPORT_EMAIL = "jobertsonrule56425@gmail.com";
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const topic = form.topic.value;
+      const message = form.message.value.trim();
+
+      if (!name || !email || !message || !form.email.checkValidity()) {
+        status.textContent = "Please fill in your name, a valid email and your message.";
+        status.classList.add("show");
+        return;
+      }
+
+      const subject = `[Nutrition & Calorie Tracker] ${topic}`;
+      const body = `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\n${message}`;
+      window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      status.textContent = "Your email app is opening. If nothing happens, please email us directly at " + SUPPORT_EMAIL + ".";
+      status.classList.add("show");
+    });
+  </script>
+</body>
+</html>
